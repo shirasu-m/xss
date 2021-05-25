@@ -1,0 +1,66 @@
+<?php
+session_start();
+
+if(isset($_SESSION["user_id"])==false){
+	$_SESSION["user_id"]="guest";
+}
+?>
+
+<!DOCTYPE>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="toppage.css">
+		<title>XSS練習用</title>
+	</head>
+	<body>
+		
+		<!--ヘッダー-->
+		<header>
+			<h1>サンプルサイト</h1>
+			<p>ようこそ<?php echo $_SESSION["user_id"] ?>さん</p>
+			<nav id="global_navi">
+				<ul>
+					<li><a href="toppage.php">XSS</a></li>
+					<li class="current"><a href="file_upload.php">ファイルアップロード</a></li>
+					<li><a href="#">リンク3</a></li>
+					<li><a href="#">リンク4</a></li>
+					<li><a href="#">リンク5</a></li>
+				</ul>
+			</nav>
+		</header>
+		<!--ヘッダー-->
+		
+		<div id="container">
+			<!--メイン-->
+			<div id="main">
+				<h2>ファイルアップロードの脆弱性</h2>
+				<p id="upload_title">アップロードしたい画像を選んでください。</p>
+				<section>
+					<form action="file_upload_done.php" method="POST" enctype="multipart/form-data">
+						<div id="upload_wrapper">
+							<input id="img_file" type="file" name="virus_file"><br>
+							<input type="submit" value="アップロード">
+						</div>
+					</form>
+				</section>
+			</div>
+			<!--メイン-->
+			
+			<!--サイドバー-->
+			<aside id="sidebar">
+				<h2>関連リンク</h2>
+				<p>ここに何らかの関連リンクが入ります。</p>
+			</aside>
+			<!--サイドバー-->
+			
+		</div>
+		
+		<!--フッター-->
+		<footer>
+			<small>2020 Sample footer</small>
+		</footer>
+		<!--フッター-->
+		
+	</body>
+</html>
